@@ -38,7 +38,7 @@
     margin-bottom: 20px;
   }
   
-  /* Section Styles */
+  /* Secciones */
   section {
     padding: 40px 0;
   }
@@ -61,6 +61,7 @@
     width: 100%;
     height: auto;
     margin-top: 20px;
+    border-radius: 8px;
   }
   
   /* Footer */
@@ -84,6 +85,10 @@
   
     section p, section ol {
       font-size: 1rem;
+    }
+  
+    section img.img-responsive {
+      width: 100%;
     }
   }
   
