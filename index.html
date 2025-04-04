@@ -21,7 +21,7 @@
     <div class="container">
       <h2>Introducción</h2>
       <p>En este tutorial, te enseñaremos cómo comprar un dominio web a través de <strong>Hostinger</strong> y configurarlo para usarlo en Oracle Cloud.</p>
-      <img src="images/foto1.jpg" alt="Comprar Dominio en Hostinger" class="img-responsive">
+      <img src="images/paso1.jpg" alt="Comprar Dominio en Hostinger" class="img-responsive">
     </div>
   </section>
 
@@ -32,11 +32,11 @@
       <ol>
         <li>
           <p>Visita el sitio web de <strong>Hostinger</strong>: Dirígete a la página principal de <a href="https://www.hostinger.com" target="_blank">Hostinger</a> para comenzar.</p>
-          <img src="images/foto2.jpg" alt="Visitar Hostinger" class="img-responsive">
+          <img src="images/paso2.jpg" alt="Visitar Hostinger" class="img-responsive">
         </li>
         <li>
           <p>Regístrate o inicia sesión en tu cuenta de <strong>Hostinger</strong>.</p>
-          <img src="images/foto3.jpg" alt="Registrarse en Hostinger" class="img-responsive">
+          <img src="images/paso3.jpg" alt="Registrarse en Hostinger" class="img-responsive">
         </li>
         <li>
           <p>Busca el dominio que deseas comprar.</p>
@@ -45,7 +45,7 @@
           <p>Realiza el pago utilizando tu método preferido.</p>
         </li>
       </ol>
-      <img src="images/foto4.jpg" alt="Pago de Dominio en Hostinger" class="img-responsive">
+      <img src="images/paso1.jpg" alt="Pago de Dominio en Hostinger" class="img-responsive">
     </div>
   </section>
 
@@ -65,7 +65,7 @@
           <p>Apunta el dominio a la dirección IP de tu instancia de Oracle Cloud.</p>
         </li>
       </ol>
-      <img src="images/foto5.jpg" alt="Configuración de DNS en Hostinger" class="img-responsive">
+      <img src="images/paso2.jpg" alt="Configuración de DNS en Hostinger" class="img-responsive">
     </div>
   </section>
 
@@ -133,6 +133,34 @@ v-add-letsencrypt-host
       </code></pre>
       
       <p>Este comando generará y asignará un certificado SSL gratuito para tu dominio, asegurando la conexión.</p>
+    </div>
+  </section>
+
+  <!-- Sección 6: Comandos para Configuración de MySQL -->
+  <section id="comandos-mysql">
+    <div class="container">
+      <h2>Comandos para Configuración de MySQL</h2>
+      <p>Si necesitas permitir que MySQL acepte conexiones desde cualquier dirección IP, sigue estos pasos. Asegúrate de tener acceso a la terminal como usuario <strong>root</strong>.</p>
+      
+      <h3>1. Cambiar la configuración de MySQL</h3>
+      <p>Ejecuta el siguiente comando para cambiar la configuración de MySQL y permitir que acepte conexiones desde cualquier dirección IP, en lugar de solo desde localhost:</p>
+      <pre><code>
+sed -i "/127.0.0.1/c\bind-address = 0.0.0.0" /etc/mysql/mysql.conf.d/mysqld.cnf
+      </code></pre>
+      
+      <h3>2. Reiniciar el servicio de MySQL</h3>
+      <p>Después de realizar el cambio en la configuración, reinicia el servicio de MySQL para aplicar los cambios:</p>
+      <pre><code>
+systemctl restart mysql.service
+      </code></pre>
+
+      <h3>3. Verificar la configuración de MySQL</h3>
+      <p>Verifica si MySQL está escuchando en todas las interfaces de red en el puerto 3306 con el siguiente comando:</p>
+      <pre><code>
+ss -tulpn | grep 0.0.0.0:3306 | wc -l
+      </code></pre>
+      
+      <p>Si el resultado es 1, significa que MySQL está funcionando correctamente y escuchando en todas las interfaces de red.</p>
     </div>
   </section>
 
