@@ -21,7 +21,7 @@
     <div class="container">
       <h2>Introducción</h2>
       <p>En este tutorial, te enseñaremos cómo comprar un dominio web a través de <strong>Hostinger</strong> y configurarlo para usarlo en Oracle Cloud.</p>
-      <img src="images/foto1.jpg" alt="Comprar Dominio en Hostinger" class="img-responsive">
+      <img src="images/paso1.jpg" alt="Comprar Dominio en Hostinger" class="img-responsive">
     </div>
   </section>
 
@@ -32,11 +32,11 @@
       <ol>
         <li>
           <p>Visita el sitio web de <strong>Hostinger</strong>: Dirígete a la página principal de <a href="https://www.hostinger.com" target="_blank">Hostinger</a> para comenzar.</p>
-          <img src="images/foto2.jpg" alt="Visitar Hostinger" class="img-responsive">
+          <img src="images/paso2.jpg" alt="Visitar Hostinger" class="img-responsive">
         </li>
         <li>
           <p>Regístrate o inicia sesión en tu cuenta de <strong>Hostinger</strong>.</p>
-          <img src="images/foto3.jpg" alt="Registrarse en Hostinger" class="img-responsive">
+          <img src="images/paso3.jpg" alt="Registrarse en Hostinger" class="img-responsive">
         </li>
         <li>
           <p>Busca el dominio que deseas comprar.</p>
@@ -45,7 +45,7 @@
           <p>Realiza el pago utilizando tu método preferido.</p>
         </li>
       </ol>
-      <img src="images/foto4.jpg" alt="Pago de Dominio en Hostinger" class="img-responsive">
+      <img src="images/paso1.jpg" alt="Pago de Dominio en Hostinger" class="img-responsive">
     </div>
   </section>
 
@@ -65,7 +65,74 @@
           <p>Apunta el dominio a la dirección IP de tu instancia de Oracle Cloud.</p>
         </li>
       </ol>
-      <img src="images/foto5.jpg" alt="Configuración de DNS en Hostinger" class="img-responsive">
+      <img src="images/paso2.jpg" alt="Configuración de DNS en Hostinger" class="img-responsive">
+    </div>
+  </section>
+
+  <!-- Sección 4: Comandos para la configuración de dominio -->
+  <section id="comandos">
+    <div class="container">
+      <h2>Comandos para la Configuración del Dominio</h2>
+      <p>En esta sección, te proporcionamos los comandos necesarios para configurar tu dominio en el servidor. Asegúrate de tener acceso a la terminal de tu servidor o a la interfaz de línea de comandos de Oracle Cloud.</p>
+      
+      <h3>1. Configuración de DNS en Oracle Cloud</h3>
+      <p>Para apuntar tu dominio a la IP de tu instancia en Oracle Cloud, utiliza el siguiente comando para agregar el registro A en la configuración de DNS:</p>
+      <pre><code>
+sudo vi /etc/bind/named.conf.local
+      </code></pre>
+      <p>Añade el siguiente bloque de configuración en el archivo:</p>
+      <pre><code>
+zone "tudominio.com" {
+  type master;
+  file "/etc/bind/db.tudominio.com";
+};
+      </code></pre>
+      
+      <p>Luego, puedes agregar el registro A para apuntar a la IP de tu instancia:</p>
+      <pre><code>
+@ IN A 123.45.67.89  <!-- IP de tu instancia de Oracle Cloud -->
+      </code></pre>
+      
+      <h3>2. Actualizar los registros de DNS en Hostinger</h3>
+      <p>En Hostinger, puedes agregar los registros DNS a través de su panel de control. Aquí te mostramos el comando que puedes utilizar para realizar la actualización:</p>
+      <pre><code>
+curl -X POST https://api.hostinger.com/v1/domains/tudominio.com/dns
+      </code></pre>
+      
+      <h3>3. Verificación del dominio y registros DNS</h3>
+      <p>Una vez que hayas configurado los registros DNS, verifica que todo esté funcionando correctamente con el siguiente comando:</p>
+      <pre><code>
+nslookup tudominio.com
+      </code></pre>
+      
+      <p>Esto debería devolver la IP de tu instancia en Oracle Cloud.</p>
+    </div>
+  </section>
+
+  <!-- Sección 5: Comandos para Cambiar el Nombre del Dominio en Hestia -->
+  <section id="comandos-hestia">
+    <div class="container">
+      <h2>Comandos para Cambiar el Nombre del Dominio en Hestia</h2>
+      <p>Si deseas cambiar el nombre de tu dominio en el panel de control de Hestia, sigue los siguientes pasos. Ejecuta estos comandos como usuario <strong>root</strong> en tu servidor de Hestia.</p>
+      
+      <h3>1. Cambiar el nombre del dominio en Hestia</h3>
+      <p>Primero, navega a la carpeta donde se encuentran los scripts de Hestia:</p>
+      <pre><code>
+cd /usr/local/hestia/bin/
+      </code></pre>
+      
+      <p>Luego, ejecuta el siguiente comando para cambiar el nombre de tu dominio a <strong>luismi.store</strong> (reemplaza "luismi.store" por el nombre de dominio que desees):</p>
+      <pre><code>
+v-change-sys-hostname luismi.store
+      </code></pre>
+
+      <h3>2. Obtener y configurar un certificado SSL con Let's Encrypt</h3>
+      <p>Finalmente, ejecuta el siguiente comando para configurar automáticamente un certificado SSL para tu dominio utilizando <strong>Let's Encrypt</strong>:</p>
+      <pre><code>
+v-add-letsencrypt-host
+      </code></pre>
+      
+      <p>Este comando generará y asignará un certificado SSL gratuito para tu dominio, asegurando la conexión.</p>
     </div>
   </section>
 

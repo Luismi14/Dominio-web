@@ -65,3 +65,23 @@ ol li {
   padding: 20px;
   margin-bottom: 20px;
 }
+
+/* Estilos para las secciones de comandos */
+#comandos, #comandos-hestia {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+}
+
+#comandos pre, #comandos-hestia pre {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 15px;
+  font-family: monospace;
+  overflow-x: auto;
+}
+
+#comandos code, #comandos-hestia code {
+  color: #d6336c; /* Resalta los comandos en color */
+}
